@@ -46,6 +46,9 @@ Running CN-Learn to identify CNVs involves the following tasks,
 
 > **git clone --recursive https://github.com/girirajanlab/CN_Learn.git** 
 
+**Important Note:** CN_Learn works only with hg19 and hg38 genome assemblies. 
+Chromosome names for ALL files below must not contain "chr" prefix. For example, "chr1" is not allowed, "1" is ok.
+
 **2) BAM files:** Place all the BAM files, along with their corresponding index files in a local directory. Ensure the following,
 
 	a) All the bam files should be named <SAMPLE>.bam and the index file named <SAMPLE>.bam.bai, 
@@ -55,7 +58,9 @@ Running CN-Learn to identify CNVs involves the following tasks,
     
     c) The directory with .bam and .bam.bai files should not have any other type of files in them.
 
-	d*) Filenames shouldn't contain any common suffix. For example, files A.bam, B.bam and C.bam are ok to process together, but files A_dedup.bam B_dedup.bam and C_dedup.bam should be renamed first so that they don't contain common "_dedup" part.
+	d*) Filenames shouldn't contain any common suffix. For example, files A.bam, B.bam and C.bam
+	 are ok to process together, but files A_dedup.bam B_dedup.bam and C_dedup.bam
+	 should be renamed so that they don't contain common "_dedup" part.
     
 **3) Reference genome:** Make sure that the version of reference genome to which the samples were mapped to, is available in the **/source/** directory, along with the index files. In addition to **<REFERENCE_GENOME>.fasta**, the following files must also be present in the same directory,
    
@@ -72,6 +77,7 @@ Running CN-Learn to identify CNVs involves the following tasks,
 >**CHR	START	END	CNV_TYPE	CNV_SIZE	SAMPLE_NAME**
 
 **Note:** CNV_TYPE can only consider either 'DUP' or 'DEL' as valid input values.
+**Note:** Recommended number of training samples (samples with validated CNVs) is >=30.
 
 **6) config.params:** Update the following parameters in the config.params file in the CN_Learn directory that was just cloned;
 
@@ -94,7 +100,7 @@ Running CN-Learn to identify CNVs involves the following tasks,
 Run the following command and make sure that it lists the recently downloaded image,
 > **docker images**
 
-**8) Prechecks:** Once all the input files are available, run the following script to ensure the presence, quality and consistency of the input BAM files, exome capture targets and the reference genome.
+**8) Prechecks:** Once all the input files are available, run the following script to ensure the presence, quality and consistency of the input BAM files, exome capture targets and the reference genome. This command must be run every time there's a change in input files.
 
 > **bash prechecks.sh** 
 
