@@ -144,9 +144,12 @@ def main():
     print(train_df.shape)
     print(test_df.shape)
 
-    X_train = pd.DataFrame(train_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'RD_PROP', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
-    X_test = pd.DataFrame(test_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'RD_PROP', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
-    X_test_all_cols = pd.DataFrame(test_df, columns = ['CHR', 'PRED_START', 'PRED_END', 'TYPE', 'SAMPLE', 'NUM_OVERLAPS', 'RD_PROP', \
+   # X_train = pd.DataFrame(train_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'RD_PROP', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
+   # X_test = pd.DataFrame(test_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'RD_PROP', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
+   # X_test_all_cols = pd.DataFrame(test_df, columns = ['CHR', 'PRED_START', 'PRED_END', 'TYPE', 'SAMPLE', 'NUM_OVERLAPS', 'RD_PROP', \
+    X_train = pd.DataFrame(train_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
+    X_test = pd.DataFrame(test_df, columns = ['CHR', 'TYPE_IND', 'NUM_OVERLAPS', 'GC', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
+    X_test_all_cols = pd.DataFrame(test_df, columns = ['CHR', 'PRED_START', 'PRED_END', 'TYPE', 'SAMPLE', 'NUM_OVERLAPS', \
                           'GC', 'PRED_SIZE', 'MAP', 'NUM_TARGETS', 'SIZE_LABEL'] + caller_list)
     Y = train_df["LABEL_VAL"]
 
