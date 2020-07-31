@@ -12,7 +12,7 @@
 ############################################################################
 echo "Job started on `hostname` at `date`"
 
-source TBD/config.params
+source /home/cnv/cn-learn/CN_Learn/config.params
 
 ################################################################################
 # STEP 1: Declare variables, directory locations and other required parameters #
@@ -46,14 +46,16 @@ cat ${DATA_XHMM_DIR}GC.txt | awk '{if ($2 < 0.1 || $2 > 0.9) print $1}' > ${DATA
 echo -e "#CHR\tBP1\tBP2\tID" > ${DATA_XHMM_DIR}targets_no_chr.reg
 awk '{print $0"\t"NR}' ${TARGET_PROBES} >> ${DATA_XHMM_DIR}targets_no_chr.reg
 
-${DOCKER_COMMAND}${PLINK_DIR}pseq . loc-load --locdb ${DATA_XHMM_DIR}targets.LOCDB \
+#${DOCKER_COMMAND}${PLINK_DIR}pseq . loc-load --locdb ${DATA_XHMM_DIR}targets.LOCDB \
+pseq . loc-load --locdb ${DATA_XHMM_DIR}targets.LOCDB \
                                              --file ${DATA_XHMM_DIR}targets_no_chr.reg --group targets \
                                              --out ${DATA_XHMM_DIR}targets.LOCDB.loc-load
 
 #####################################
 # STEP 5: Identify complexity of loci
 #####################################
-${DOCKER_COMMAND}${PLINK_DIR}pseq . loc-stats --locdb ${DATA_XHMM_DIR}targets.LOCDB --group targets \
+#${DOCKER_COMMAND}${PLINK_DIR}pseq . loc-stats --locdb ${DATA_XHMM_DIR}targets.LOCDB --group targets \
+pseq . loc-stats --locdb ${DATA_XHMM_DIR}targets.LOCDB --group targets \
                                               --seqdb ${PLINK_DIR}seqdb.hg19 \
                                         | awk '{if (NR > 1) print $_}' \
                                         | sort -k1 -g | awk '{print $10}' \
