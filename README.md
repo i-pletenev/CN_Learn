@@ -54,6 +54,8 @@ Running CN-Learn to identify CNVs involves the following tasks,
     b) Each bam file must have an index file associated with it.
     
     c) The directory with .bam and .bam.bai files should not have any other type of files in them.
+
+	d*) Filenames shouldn't contain any common suffix. For example, files A.bam, B.bam and C.bam are ok to process together, but files A_dedup.bam B_dedup.bam and C_dedup.bam should be renamed first so that they don't contain common "_dedup" part.
     
 **3) Reference genome:** Make sure that the version of reference genome to which the samples were mapped to, is available in the **/source/** directory, along with the index files. In addition to **<REFERENCE_GENOME>.fasta**, the following files must also be present in the same directory,
    
